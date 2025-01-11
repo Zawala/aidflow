@@ -1,0 +1,138 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-01-04 07:10:14.933334",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "project_details_section",
+  "project_title",
+  "project_description",
+  "column_break_ouei",
+  "province",
+  "district",
+  "thermatic_area",
+  "thumbnail",
+  "priority",
+  "status",
+  "published",
+  "section_break_vysq",
+  "progress"
+ ],
+ "fields": [
+  {
+   "fieldname": "project_details_section",
+   "fieldtype": "Section Break",
+   "label": "Project Details"
+  },
+  {
+   "fieldname": "project_title",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Project Title"
+  },
+  {
+   "fieldname": "project_description",
+   "fieldtype": "Long Text",
+   "label": "Project Description"
+  },
+  {
+   "fieldname": "column_break_ouei",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "thumbnail",
+   "fieldtype": "Attach Image",
+   "label": "Thumbnail"
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Rating",
+   "label": "priority"
+  },
+  {
+   "fieldname": "section_break_vysq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "progress",
+   "fieldtype": "Table",
+   "label": "Progress",
+   "options": "Progress",
+   "read_only": 1
+  },
+  {
+   "default": "Open",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Open\nCompleted\nCancelled",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "published",
+   "fieldtype": "Check",
+   "label": "Published",
+   "read_only": 1
+  },
+  {
+   "fieldname": "thermatic_area",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Thermatic Area",
+   "options": "HIV\nMALARIA\nTB\nNCDs\nDISABILITY\nSRHR\nWOMEN RIGHTS\nCHILD RIGHTS\nHEALTH ADVOCACY\nOVC\nGENDER\nMARTENAL HEALTH\nHEALTH RELATED RESEARCH\nHEALTH INFORMATION SYSTEMS\nKEY POPULATION\nLGBTIQ\nDRUGS AND SUBSTANCE ABUSE\nEMERGENCIES\nMENTAL HEALTH\nCLIMATE CHANGE\nECONOMIC EMPOWERMENT\nYOUTH\nFOOD SECURITY"
+  },
+  {
+   "fieldname": "province",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Province",
+   "options": "Harare\nBulawayo\nManicaland\nMashonaland Central\nMashonaland East\nMashonaland West\nMasvingo\nMatabeleland North\nMatabeleland South\nMidlands"
+  },
+  {
+   "fieldname": "district",
+   "fieldtype": "Select",
+   "label": "District"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-01-08 07:25:17.751975",
+ "modified_by": "Administrator",
+ "module": "Aidflow",
+ "name": "Project",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

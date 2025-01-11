@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <title>AidFlow</title>
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <script>
+            window.frappe = {};
+            frappe.ready_events = [];
+            frappe.ready = function(fn) {
+              frappe.ready_events.push(fn);
+            }
+            window.dev_server = {{ dev_server }};
+            window.socketio_port = {{ (frappe.socketio_port or 9000) }};
+            window.show_language_picker = {{ show_language_picker or 'false' }};
+          </script>
+          {{ include_script('frappe-web.bundle.js') }}
+        <link href="css/styles.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/demo.css" />
+        <link rel="stylesheet" href="css/testimonial.css" />
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+    <div class="header container">
+      <div class="visible-xs visible-sm col-xs-12 col-sm-12 text-center sm-logo">
+        <a rel="home" href="index.html">
+          <img src="img/logo.png" width="200" alt="logo">
+        </a>
+      </div>
+    </div>
+        <div class="navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="service.html">Community Problems</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li class= "hidden-xs hidden-sm">
+                     <a rel="home" href="index.html"><img class="logo" src="img/logo.png" width="200" alt="logo"></a>
+                    </li>
+                    
+                    
+                    <li><a href="donate.html">Donate</a></li>
+                    <li class="selected"><a href="upload_issue.html">Upload Issues</a></li>
+                </ul>
+            </div>
+        </div>
+     <div class="divider col-sm-12 col-xs-12 col-md-12">
+            <div class="header-text"><span>Upload </span>Issues</div>
+        </div>
+
+                    <div class="col-md-6 col-md-offset-1 col-sm-7 col-xs-12">
+
+                        <div class="widget">
+                            <h3 class="widget-title style5">Upload Issues</h3>
+                            <p>The challenges faced in the Zimbabwean communities differ from socio-economic issues that include infrastructure and health inadequacies to environmental and education gaps. While various NGOs and philanthropists come forward to address these issues, there is still a huge gap in aligning the resources to the priorities of the community and also lack of transparency on the usage of these resources. </p>
+                            
+                        </div>
+                        <!-- widget -->
+
+                    </div>
+                    <!-- col-md-7 -->
+
+            <div class="contact-form-full col-md-4 col-sm-4 col-xs-11">
+
+              <div class="inner contact">
+                <!-- Form Area -->
+                <div class="contact-form">
+                    <!-- Form -->
+                    <form id="contact-us" method="post" action="#">
+                        <!-- Left Inputs -->
+                        <div class="col-xs-12 wow animated slideInLeft" data-wow-delay=".5s">
+                            <!-- Name -->
+                            <input type="text" id="title" required="required" class="form" placeholder="Title" />
+                            <select id="province" class="form" required="required" >
+                                <option selected disabled>Select Province</option>
+                                <option></option>
+                                <option>Harare</option>
+                                <option>Bulawayo</option>
+                                <option>Manicaland</option>
+                                <option>Mashonaland Central</option>
+                                <option>Mashonaland East</option>
+                                <option>Mashonaland West</option>
+                                <option>Masvingo</option>
+                                <option>Matabeleland North</option>
+                                <option>Matabeleland South</option>
+                                <option>Midlands</option>
+                              </select>
+                              <select id="thematic" class="form" required="required" >
+                                <option selected disabled>Thematic <Area></Area></option>
+                                <option></option>
+                                <option>HIV</option>
+                                <option>MALARIA</option>
+                                <option>TB</option>
+                                <option>NCDs</option>
+                                <option>DISABILITY</option>
+                                <option>SRHR</option>
+                                <option>WOMEN RIGHTS</option>
+                                <option>CHILD RIGHTS</option>
+                                <option>HEALTH ADVOCACY</option>
+                                <option>OVC</option>
+                                <option>GENDER</option>
+                                <option>MARTENAL HEALTH</option>
+                                <option>HEALTH RELATED RESEARCH</option>
+                                <option>HEALTH INFORMATION SYSTEMS</option>
+                                <option>KEY POPULATION</option>
+                                <option>LGBTIQ</option>
+                                <option>DRUGS AND SUBSTANCE ABUSE</option>
+                                <option>EMERGENCIES</option>
+                                <option>MENTAL HEALTH</option>
+                                <option>CLIMATE CHANGE</option>
+                                <option>ECONOMIC EMPOWERMENT</option>
+                                <option>YOUTH</option>
+                                <option>FOOD SECURITY</option>
+                              </select>
+                            <!-- Email -->
+
+                        </div><!-- End Left Inputs -->
+                        <!-- Right Inputs -->
+                        <div class="col-xs-12 wow animated slideInRight" data-wow-delay=".5s">
+                            <!-- Message -->
+                            <textarea id="description" required="required" class="form textarea"  placeholder="Description"></textarea>
+                        </div><!-- End Right Inputs -->
+                        <!-- Bottom Submit -->
+                        <div class="relative fullwidth col-xs-12">
+                            <!-- Send Button -->
+                            <button id="submit" name="submit" class="form-btn semibold">Submit Issue</button>
+                        </div><!-- End Bottom Submit -->
+                        <!-- Clear -->
+                        <div class="clear"></div>
+                    </form>
+
+                    <!-- Your Mail Message -->
+                    <div class="mail-message-area">
+                        <!-- Message -->
+                        <div class="alert gray-bg mail-message not-visible-message">
+                            <strong>Thank You !</strong> Your email has been delivered.
+                        </div>
+                    </div>
+
+                </div><!-- End Contact Form Area -->
+            </div><!-- End Inner -->
+          </div>
+            <!-- wrapper -->
+        </section>
+     
+
+    <!-- ============FOOTER============= -->
+
+    
+    <footer id="footer"> 
+        <div class="footer-content container">
+          <div class="footer-adress text-center col-xs-12 col-sm-4 col-md-4">
+                <h4>Great love for humanity</h4>
+                
+            </div>
+            <div class="footer-second col-xs-12 col-sm-4 col-md-4">
+              
+              </div>
+              
+                <p class="text-center footer-text">H210388Q@hit.ac.co.zw</p></div>
+            <div class="footer-third col-xs-12 col-sm-4 col-md-4">
+              
+            </div>
+        </div>
+        <div class="move-top-page">
+      </div>
+    </footer>
+
+  <!-- script references -->
+
+   
+     <!-- JS here -->
+     {% block base_scripts %}
+     <!-- js should be loaded in body! -->
+     <script>
+         frappe.boot = {{ boot }}
+         // for backward compatibility of some libs
+         frappe.sys_defaults = frappe.boot.sysdefaults;
+     </script>
+     
+     {% endblock %}
+ 
+     {%- for link in web_include_js %}
+     {{ include_script(link) }}
+     {%- endfor -%}
+ 
+     {%- block script %}
+         {% if colocated_js -%}
+             <script>{{ colocated_js }}</script>
+         {%- endif %}
+     {%- endblock %}
+     <script>{% include "www/js/upload_issue.js" %}</script>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/nav-hover.min.js"></script>
+    <script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <!-- Place in the <head>, after the three links -->
+    <script>
+     $('.testimonials-slider').bxSlider({
+      slideWidth: 800,
+      minSlides: 1,
+      maxSlides: 1,
+      slideMargin: 32,
+      auto: true,
+      autoControls: true
+      });
+    </script>
+    <script type="text/javascript">
+    </script>
+    	{%- block body_include %}{{ body_include or "" }}{% endblock -%}
+
+  </body>
+</html>
