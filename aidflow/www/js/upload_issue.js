@@ -16,7 +16,7 @@ $( "#submit" ).click(function (event) {
             'province': province
         };
         $.ajax({
-            url: "/api/method/aidflow.www.contact.upload_issue",
+            url: "/api/method/aidflow.www.upload_issue.upload_issue",
             type: "POST",
             data: args,
             headers: {

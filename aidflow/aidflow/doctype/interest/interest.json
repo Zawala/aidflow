@@ -1,0 +1,223 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-01-12 06:22:18.179417",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "user_details_section",
+  "user",
+  "selected_interests_section",
+  "hiv",
+  "malaria",
+  "tb",
+  "ovc",
+  "key_population",
+  "lgbtiq",
+  "emergencies",
+  "mental_health",
+  "climate_change",
+  "economic_empowerment",
+  "youth",
+  "food_security",
+  "column_break_nldi",
+  "ncds",
+  "gender",
+  "health_related_research",
+  "health_information_systems",
+  "health_advocacy",
+  "disability",
+  "drugs_and_substance_abuse",
+  "srhr",
+  "martenal_health",
+  "women_rights",
+  "child_rights"
+ ],
+ "fields": [
+  {
+   "fieldname": "user_details_section",
+   "fieldtype": "Section Break",
+   "label": "User Details"
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_preview": 1,
+   "label": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "selected_interests_section",
+   "fieldtype": "Section Break",
+   "label": "Selected Interests"
+  },
+  {
+   "default": "0",
+   "fieldname": "hiv",
+   "fieldtype": "Check",
+   "label": "HIV"
+  },
+  {
+   "default": "0",
+   "fieldname": "malaria",
+   "fieldtype": "Check",
+   "label": "MALARIA"
+  },
+  {
+   "default": "0",
+   "fieldname": "tb",
+   "fieldtype": "Check",
+   "label": "TB"
+  },
+  {
+   "default": "0",
+   "fieldname": "ncds",
+   "fieldtype": "Check",
+   "label": "NCDs"
+  },
+  {
+   "default": "0",
+   "fieldname": "disability",
+   "fieldtype": "Check",
+   "label": "DISABILITY"
+  },
+  {
+   "default": "0",
+   "fieldname": "srhr",
+   "fieldtype": "Check",
+   "label": "SRHR"
+  },
+  {
+   "default": "0",
+   "fieldname": "women_rights",
+   "fieldtype": "Check",
+   "label": "WOMEN RIGHTS"
+  },
+  {
+   "default": "0",
+   "fieldname": "child_rights",
+   "fieldtype": "Check",
+   "label": "CHILD RIGHTS"
+  },
+  {
+   "default": "0",
+   "fieldname": "health_advocacy",
+   "fieldtype": "Check",
+   "label": "HEALTH ADVOCACY"
+  },
+  {
+   "default": "0",
+   "fieldname": "ovc",
+   "fieldtype": "Check",
+   "label": "OVC"
+  },
+  {
+   "default": "0",
+   "fieldname": "gender",
+   "fieldtype": "Check",
+   "label": "GENDER"
+  },
+  {
+   "default": "0",
+   "fieldname": "martenal_health",
+   "fieldtype": "Check",
+   "label": "MARTENAL HEALTH"
+  },
+  {
+   "default": "0",
+   "fieldname": "health_related_research",
+   "fieldtype": "Check",
+   "label": "HEALTH RELATED RESEARCH"
+  },
+  {
+   "default": "0",
+   "fieldname": "health_information_systems",
+   "fieldtype": "Check",
+   "label": "HEALTH INFORMATION SYSTEMS"
+  },
+  {
+   "default": "0",
+   "fieldname": "key_population",
+   "fieldtype": "Check",
+   "label": "KEY POPULATION"
+  },
+  {
+   "default": "0",
+   "fieldname": "lgbtiq",
+   "fieldtype": "Check",
+   "label": "LGBTIQ"
+  },
+  {
+   "default": "0",
+   "fieldname": "drugs_and_substance_abuse",
+   "fieldtype": "Check",
+   "label": "DRUGS AND SUBSTANCE ABUSE"
+  },
+  {
+   "default": "0",
+   "fieldname": "emergencies",
+   "fieldtype": "Check",
+   "label": "EMERGENCIES"
+  },
+  {
+   "default": "0",
+   "fieldname": "mental_health",
+   "fieldtype": "Check",
+   "label": "MENTAL HEALTH"
+  },
+  {
+   "default": "0",
+   "fieldname": "climate_change",
+   "fieldtype": "Check",
+   "label": "CLIMATE CHANGE"
+  },
+  {
+   "default": "0",
+   "fieldname": "economic_empowerment",
+   "fieldtype": "Check",
+   "label": "ECONOMIC EMPOWERMENT"
+  },
+  {
+   "default": "0",
+   "fieldname": "youth",
+   "fieldtype": "Check",
+   "label": "YOUTH"
+  },
+  {
+   "default": "0",
+   "fieldname": "food_security",
+   "fieldtype": "Check",
+   "label": "FOOD SECURITY"
+  },
+  {
+   "fieldname": "column_break_nldi",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-01-12 06:33:10.547449",
+ "modified_by": "Administrator",
+ "module": "Aidflow",
+ "name": "Interest",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

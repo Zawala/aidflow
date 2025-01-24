@@ -8,9 +8,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <!--[if lt IE 9]>
-            <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        <script>
+          window.frappe = {};
+          frappe.ready_events = [];
+          frappe.ready = function(fn) {
+            frappe.ready_events.push(fn);
+          }
+          window.dev_server = {{ dev_server }};
+          window.socketio_port = {{ (frappe.socketio_port or 9000) }};
+          window.show_language_picker = {{ show_language_picker or 'false' }};
+        </script>
+        {{ include_script('frappe-web.bundle.js') }}
         <link href="css/styles.css" rel="stylesheet">
         <link rel="stylesheet" href="css/demo.css" />
         <link rel="stylesheet" href="css/testimonial.css" />
@@ -38,7 +46,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
-                    <li class="selected"><a href="service.html">Community Problems</a></li>
+                    <li class="selected"><a href="community_issues.html">Community Problems</a></li>
                     <li><a href="gallery.html">Gallery</a></li>
                     <li class= "hidden-xs hidden-sm">
                      <a rel="home" href="index.html"><img class="logo" src="img/logo.png" width="200" alt="logo"></a>
@@ -52,57 +60,67 @@
         </div>
         <div class="divider col-sm-12 col-xs-12 col-md-12">
             <div class="header-text"> Our <span>Problems</span></div>
-        </div>
+        <nav class="navbar navbar-light  justify-content-between">
+          <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" id="search_field" placeholder="Name" aria-label="Search">
+          
+            <select id="province" class="form-control mr-sm-2">
+              <option selected disabled>Select Province</option>
+              <option></option>
+              <option>Harare</option>
+              <option>Bulawayo</option>
+              <option>Manicaland</option>
+              <option>Mashonaland Central</option>
+              <option>Mashonaland East</option>
+              <option>Mashonaland West</option>
+              <option>Masvingo</option>
+              <option>Matabeleland North</option>
+              <option>Matabeleland South</option>
+              <option>Midlands</option>
+            </select>
+            <select id="thematic" class="form-control mr-sm-2">
+              <option selected disabled>Thematic <Area></Area></option>
+              <option></option>
+              <option>HIV</option>
+              <option>MALARIA</option>
+              <option>TB</option>
+              <option>NCDs</option>
+              <option>DISABILITY</option>
+              <option>SRHR</option>
+              <option>WOMEN RIGHTS</option>
+              <option>CHILD RIGHTS</option>
+              <option>HEALTH ADVOCACY</option>
+              <option>OVC</option>
+              <option>GENDER</option>
+              <option>MARTENAL HEALTH</option>
+              <option>HEALTH RELATED RESEARCH</option>
+              <option>HEALTH INFORMATION SYSTEMS</option>
+              <option>KEY POPULATION</option>
+              <option>LGBTIQ</option>
+              <option>DRUGS AND SUBSTANCE ABUSE</option>
+              <option>EMERGENCIES</option>
+              <option>MENTAL HEALTH</option>
+              <option>CLIMATE CHANGE</option>
+              <option>ECONOMIC EMPOWERMENT</option>
+              <option>YOUTH</option>
+              <option>FOOD SECURITY</option>
+            </select>
+            <button class="btn btn-outline-success my-2 my-sm-0" id="search">Search</button>
+          </form>
+        </nav>
+      </div>
+      
 
         <section id="blog-isotope" class="subpage bg-white">
         <div class="overlay-light">
             <div id="content" class="container">
                 <!-- posts -->
-                <div class="posts">
+                <div class="posts" id="capsule_card">
                     <!-- post 1 -->
-                    <div class="post item col-md-4 col-xs-12 col-sm-4">
-                           <div class="panel">
-                                  <div class="panel-header">
-                                     <img src="img/blog-bg-children-02.jpg" class="img-responsive"  alt="image"/>
-                                  </div>
-                                  <div class="panel-body">
-                                       <h3 class="post-title"><a href="blog-post.html">Enrichment Camps</a></h3>
-
-                                        <p>Nam consequat lacus purus, ac hendrerit ipsum pellentesque ut. Mauris orci ante, sodales ut lorem sed, semper aliquam diam. Sit amet tellus velit lacus purus.</p>
-                                        <div class="pull-left"><a class="btn btn-black btn-xs" href="#"><span class="read-more">Read More</span></a></div>
-                                  </div>
-                                  <div class="panel-footer">
-                                    <div class="pull-right">
-                                        <a href="#"><i class="fa fa-heart"></i></a>
-                                        <small>425</small>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                  </div>
-                            </div>
-                    </div>
-                    <!-- post 2 -->
-                    <div class="post item col-md-4 col-xs-12 col-sm-4">
-                           <div class="panel">
-                                  <div class="panel-header">
-                                     <img src="img/gal-bg-feet-01.jpg" class="img-responsive"  alt="image"/>
-                                  </div>
-                                  <div class="panel-body">
-                                       <h3 class="post-title"><a href="blog-post.html">Making it Right</a></h3>
-
-                                        <p>Duis ut enim nibh. Suspendisse auctor mi eros, eu fermentum nisi iaculis eget. In porta elementum imperdiet. Pellentesque sapien massa, efficitur ut ornare eu, placerat non lectus. Nam consequat lacus purus, ac hendrerit ipsum pellentesque ut. Mauris orci ante, sodales ut lorem sed, semper aliquam diam. Sit amet tellus velit lacus purus.</p>
-                                        <div class="pull-left"><a class="btn btn-black btn-xs" href="#"><span class="read-more">Read More</span></a></div>
-                                  </div>
-                                  <div class="panel-footer">
-                                    <div class="pull-right">
-                                        <a href="#"><i class="fa fa-heart"></i></a>
-                                        <small>1022</small>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                  </div>
-                            </div>
-                    </div>
+                    
+                   
                     <!-- post 3 -->
-                    <div class="post item col-md-4 col-xs-12 col-sm-4">
+                    <!-- <div class="post item col-md-4 col-xs-12 col-sm-4">
                            <div class="panel">
                                   <div class="panel-header">
                                      <img src="img/blog-bg-school-01.jpg" class="img-responsive"  alt="image"/>
@@ -121,15 +139,14 @@
                                     <div class="clearfix"></div>
                                   </div>
                             </div>
-                    </div>
+                    </div> -->
 
+            </div>
 
                 <!-- pager -->
                   <ul class="col-md-12 pager wow animated fadeIn">
-                    <li class="previous"><a href="#">&larr; Older</a></li>
-                    <li class="next"><a href="#">Newer &rarr;</a></li>
+                    <li class="next"><a id="load">Newer &rarr;</a></li>
                   </ul><!-- /end pager -->
-            </div>
          </div><!-- /end overlay -->
       </section><!--=== / END blog ===-->
 
@@ -154,6 +171,29 @@
     </footer>
 
   <!-- script references -->
+   
+     <!-- JS here -->
+     {% block base_scripts %}
+     <!-- js should be loaded in body! -->
+     <script>
+         frappe.boot = {{ boot }}
+         // for backward compatibility of some libs
+         frappe.sys_defaults = frappe.boot.sysdefaults;
+     </script>
+     
+     {% endblock %}
+ 
+     {%- for link in web_include_js %}
+     {{ include_script(link) }}
+     {%- endfor -%}
+ 
+     {%- block script %}
+         {% if colocated_js -%}
+             <script>{{ colocated_js }}</script>
+         {%- endif %}
+     {%- endblock %}
+     <script>{% include "www/js/community_issues.js" %}</script>
+
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/nav-hover.min.js"></script>
@@ -170,7 +210,6 @@
       autoControls: true
       });
     </script>
-    <script type="text/javascript">
-    </script>
+   {%- block body_include %}{{ body_include or "" }}{% endblock -%}
   </body>
 </html>
