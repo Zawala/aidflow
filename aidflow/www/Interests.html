@@ -8,9 +8,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <!--[if lt IE 9]>
-            <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        <script>
+          window.frappe = {};
+          frappe.ready_events = [];
+          frappe.ready = function(fn) {
+            frappe.ready_events.push(fn);
+          }
+          window.dev_server = {{ dev_server }};
+          window.socketio_port = {{ (frappe.socketio_port or 9000) }};
+          window.show_language_picker = {{ show_language_picker or 'false' }};
+        </script>
+        {{ include_script('frappe-web.bundle.js') }}
         <link href="css/styles.css" rel="stylesheet">
         <link rel="stylesheet" href="css/demo.css" />
         <link rel="stylesheet" href="css/testimonial.css" />
@@ -53,7 +61,7 @@
 		<div class="divider col-sm-12 col-xs-12 col-md-12">
             <div class="header-text"><span>Select</span> Preferences</div>
         </div>
-
+      <form>
 		 <div class="container">
                 <div class="col-md-4">
                     <div class="form-check">
@@ -178,6 +186,8 @@
                     </div><!-- End Bottom Submit -->
                 </li>
               </ul><!-- /end pager -->
+
+            </form>
     <!-- ============FOOTER============= -->
 
    <footer id="footer"> 
@@ -199,6 +209,28 @@
       </div>
     </footer>
 
+   
+     <!-- JS here -->
+     {% block base_scripts %}
+     <!-- js should be loaded in body! -->
+     <script>
+         frappe.boot = {{ boot }}
+         // for backward compatibility of some libs
+         frappe.sys_defaults = frappe.boot.sysdefaults;
+     </script>
+     
+     {% endblock %}
+ 
+     {%- for link in web_include_js %}
+     {{ include_script(link) }}
+     {%- endfor -%}
+ 
+     {%- block script %}
+         {% if colocated_js -%}
+             <script>{{ colocated_js }}</script>
+         {%- endif %}
+     {%- endblock %}
+     <script>{% include "www/js/Interests.js" %}</script>
     <!-- script references -->
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>

@@ -3,17 +3,19 @@ import json
 import frappe
 from frappe import _
 from frappe.utils import flt
-import datetime
 
 
 no_cache = 1
-expected_keys = (
-	"query",
-)
 
 
 def get_context(context):
-	context.no_cache = 1
+	
+	if frappe.session.user=='Guest':
+		frappe.throw(_("You need to be logged in to access this page"), frappe.PermissionError)
+	if not frappe.session.user=='Guest' and not frappe.db.exists({"doctype": "Interest", "user": frappe.session.user}):
+		frappe.msgprint('Create Interests Profile')
+		frappe.local.flags.redirect_location = "/Interests"
+		raise frappe.Redirect
 	context.csfr_token=frappe.sessions.get_csrf_token()
 	context.user=frappe.session.user
 	print(context)

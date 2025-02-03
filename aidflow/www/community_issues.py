@@ -13,14 +13,16 @@ expected_keys = (
 
 
 def get_context(context):
-	context.no_cache = 1
+	if not frappe.session.user=='Guest' and not frappe.db.exists({"doctype": "Interest", "user": frappe.session.user}):
+		frappe.msgprint('Create Interests Profile')
+		frappe.local.flags.redirect_location = "/Interests"
+		raise frappe.Redirect
 	context.csfr_token=frappe.sessions.get_csrf_token()
 	# # all these keys exist in form_dict
 	if not (set(expected_keys) - set(list(frappe.form_dict))):
 		for key in expected_keys:
 			context[key] = frappe.form_dict[key]
-
-		context.year=datetime.datetime.now().year
+		context.user=frappe.session.user
 	
 
 @frappe.whitelist(allow_guest=True)

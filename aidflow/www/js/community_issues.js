@@ -24,19 +24,22 @@ $(document).ready(function() {
         success: function(r) {
             posts = r.message;
             
-            console.log(posts);
             posts.forEach(post => {
                 const col = document.createElement('div');
                 col.className = 'post item col-md-4 col-xs-12 col-sm-4"';
                 
                 const thumbnailSrc = post[4] ? `${post[4]}` : "images/organisation-placeholder.svg";
-                var liked_by = liked_by ? decodeURI(post[5]) : "[]";
-                console.log(post[5]);
+                var liked_by = post[5] ? decodeURI(post[5]) : "[]";
                 liked_by = JSON.parse(liked_by);
                 if (!liked_by || liked_by === null) {
                     var liked_by_length = 0;
                 }else{
                     var liked_by_length=liked_by.length;
+                }
+                if (liked_by.includes("{{user}}")){
+                    var special_class='fa fa-heart';
+                }else{
+                    var special_class='fa fa-heart-o';
                 }
                 col.innerHTML = `
                      
@@ -48,12 +51,16 @@ $(document).ready(function() {
                                    <h3 class="post-title"><a href="blog-post.html">${post[1]}</a></h3>
 
                                     <p>${post[2]}</p>
-                                    <div class="pull-left"><a class="btn btn-black btn-xs" href="/Issue?name=${post[0]}"><span class="read-more">Read More</span></a></div>
+                                    <div class="pull-left"><a class="btn btn-black btn-xs" href="/community_issue?name=${post[0]}"><span class="read-more">Read More</span></a></div>
                               </div>
                               <div class="panel-footer">
                                 <div class="pull-right">
-                                    <a href="#"><i class="fa fa-heart"></i></a>
-                                    <small>${liked_by_length}</small>
+                                <button style="background: none;  cursor: pointer; padding: 0;" 
+                                id="${post[0]}" class="btn btn-borderless btn_like">
+                                <i id="${post[0]}_icon" class="${special_class}"></i>
+                                </button>
+                                    
+                                    <small id="${post[0]}_count">${liked_by_length}</small>
                                 </div>
                                 <div class="clearfix"></div>
                               </div>
@@ -96,38 +103,52 @@ $(document).ready(function() {
             },
             success: function(r) {
                 posts = r.message;
+            
+            posts.forEach(post => {
+                const col = document.createElement('div');
+                col.className = 'post item col-md-4 col-xs-12 col-sm-4"';
                 
-                console.log(posts);
-                posts.forEach(post => {
-                    const col = document.createElement('div');
-                    col.className = 'post item col-md-4 col-xs-12 col-sm-4"';
-                    
-                    const thumbnailSrc = post[3] ? `${post[3]}` : "images/organisation-placeholder.svg";
-                    const aim = post[1] ? `${post[1]}` : "None";
-                    col.innerHTML = `
-                         
-                        <div class="panel">
-                                  <div class="panel-header">
-                                     <img src="img/blog-bg-school-01.jpg" class="img-responsive"  alt="image"/>
-                                  </div>
-                                  <div class="panel-body">
-                                       <h3 class="post-title"><a href="blog-post.html">Volunteer Spotlight</a></h3>
+                const thumbnailSrc = post[4] ? `${post[4]}` : "images/organisation-placeholder.svg";
+                var liked_by = post[5] ? decodeURI(post[5]) : "[]";
+                liked_by = JSON.parse(liked_by);
+                if (!liked_by || liked_by === null) {
+                    var liked_by_length = 0;
+                }else{
+                    var liked_by_length=liked_by.length;
+                }
+                if (liked_by.includes("{{user}}")){
+                    var special_class='fa fa-heart';
+                }else{
+                    var special_class='fa fa-heart-o';
+                }
+                col.innerHTML = `
+                     
+                    <div class="panel">
+                              <div class="panel-header">
+                                 <img src=${thumbnailSrc} class="img-responsive"  alt="image"/>
+                              </div>
+                              <div class="panel-body">
+                                   <h3 class="post-title"><a href="blog-post.html">${post[1]}</a></h3>
 
-                                        <p>Ac hendrerit ipsum pellentesque ut. Mauris orci ante, sodales ut lorem sed, semper aliquam diam. Sit amet tellus velit lacus purus.</p>
-                                        <div class="pull-left"><a class="btn btn-black btn-xs" href="#"><span class="read-more">Read More</span></a></div>
-                                  </div>
-                                  <div class="panel-footer">
-                                    <div class="pull-right">
-                                        <a href="#"><i class="fa fa-heart"></i></a>
-                                        <small>1658</small>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                  </div>
-                            </div>
-                   `;
-                    
-                        capsuleCard.appendChild(col);
-                });
+                                    <p>${post[2]}</p>
+                                    <div class="pull-left"><a class="btn btn-black btn-xs" href="/community_issue?name=${post[0]}"><span class="read-more">Read More</span></a></div>
+                              </div>
+                              <div class="panel-footer">
+                                <div class="pull-right">
+                                <button style="background: none;  cursor: pointer; padding: 0;" 
+                                id="${post[0]}" class="btn btn-borderless btn_like">
+                                <i class="${special_class}"></i>
+                                </button>
+                                    
+                                    <small>${liked_by_length}</small>
+                                </div>
+                                <div class="clearfix"></div>
+                              </div>
+                        </div>
+               `;
+                
+                    capsuleCard.appendChild(col);
+            });
             },
             error: function(xhr, status, error) {
                 console.error("Error:", error);
@@ -160,51 +181,123 @@ $(document).ready(function() {
                     provice: $("#province").val()
                 },
                 headers: {
-                    'X-Frappe-CSRF-Token': '{{ csfr_token }}'
+                    'X-Frappe-CSRF-Token':  '{{csfr_token}}'
                 },
                 success: function(r) {
                     posts = r.message;
-                    
-                    console.log(posts);
-                    posts.forEach(post => {
-                        const col = document.createElement('div');
-                        col.className = 'col-lg-4 col-md-6 col-sm-6';
-                        
-                        const thumbnailSrc = post[3] ? `${post[3]}` : "images/organisation-placeholder.svg";
-                        const aim = post[1] ? `${post[1]}` : "None";
-                        col.innerHTML = `
-                             
-                            <div class="single-cases mb-40">
-                                <div class="cases-img">
-                                    <img src="${thumbnailSrc}" alt="">
+                
+                console.log(posts);
+                posts = r.message;
+            
+            posts.forEach(post => {
+                const col = document.createElement('div');
+                col.className = 'post item col-md-4 col-xs-12 col-sm-4"';
+                
+                const thumbnailSrc = post[4] ? `${post[4]}` : "images/organisation-placeholder.svg";
+                var liked_by = post[5] ? decodeURI(post[5]) : "[]";
+                liked_by = JSON.parse(liked_by);
+                if (!liked_by || liked_by === null) {
+                    var liked_by_length = 0;
+                }else{
+                    var liked_by_length=liked_by.length;
+                }
+                if (liked_by.includes("{{user}}")){
+                    var special_class='fa fa-heart';
+                }else{
+                    var special_class='fa fa-heart-o';
+                }
+                col.innerHTML = `
+                     
+                    <div class="panel">
+                              <div class="panel-header">
+                                 <img src=${thumbnailSrc} class="img-responsive"  alt="image"/>
+                              </div>
+                              <div class="panel-body">
+                                   <h3 class="post-title"><a href="blog-post.html">${post[1]}</a></h3>
+
+                                    <p>${post[2]}</p>
+                                    <div class="pull-left"><a class="btn btn-black btn-xs" href="/community_issue?name=${post[0]}"><span class="read-more">Read More</span></a></div>
+                              </div>
+                              <div class="panel-footer">
+                                <div class="pull-right">
+                                <button style="background: none;  cursor: pointer; padding: 0;" 
+                                id="${post[0]}" class="btn btn-borderless btn_like">
+                                <i class="${special_class}"></i>
+                                </button>
+                                    
+                                    <small>${liked_by_length}</small>
                                 </div>
-                                <div class="cases-caption">
-                                    <h3><a href="/organisation?name=${post[0]}">${post[0].substring(0, 30)}</a></h3>
-                                    <!-- Progress Bar -->
-                                    <div class="single-skill mb-15">
-                                        <div class="bar-progress">
-                                            <div id="bar1" class="barfiller">
-                                                <div class="tipWrap">
-                                                    <span class="tip"></span>
-                                                </div>
-                                                <span class="fill" data-percentage="70"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- / progress -->
-                                    <div class="prices d-flex justify-content-between">
-                                        <p>${aim.substring(0, 160)}</p>
-                                    </div>
-                                </div>
-                            </div>
-                       `;
-                        
-                            capsuleCard.appendChild(col);
-                    });
+                                <div class="clearfix"></div>
+                              </div>
+                        </div>
+               `;
+                
+                    capsuleCard.appendChild(col);
+            });
                 },
                 error: function(xhr, status, error) {
                     console.error("Error:", error);
                 }
             });
         
+            });
+
+            $(document).on('click', '.btn_like', function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+            
+                // Get the ID of the clicked button
+                var buttonId = $(this).attr('id');
+                var $btn = $("#" + buttonId + "_icon"); // The like icon
+                var $count = $("#" + buttonId + "_count"); // The like count element
+                const add = $($btn).hasClass("fa-heart-o") ? "Yes" : "No"; // Check current state
+                var doctype = "Project"; // The doctype being liked
+            
+                console.log(add);
+            
+                $.ajax({
+                    url: "/api/method/frappe.desk.like.toggle_like", // Replace with the correct method endpoint
+                    type: "POST",
+                    data: {
+                        doctype: doctype,
+                        name: buttonId,
+                        add: add,
+                    },
+                    headers: {
+                        'X-Frappe-CSRF-Token':  '{{csfr_token}}' // Use the global Frappe CSRF token
+                    },
+                    success: function(r) {
+                        // Toggle the icon classes
+                        $($btn).toggleClass("fa-heart-o", add === "No");
+                        $($btn).toggleClass("fa-heart", add === "Yes");
+            
+                        // Update the like count
+                        var currentCount = parseInt($($count).text(), 10) || 0; // Get current count
+                        if (add === "Yes") {
+                            currentCount += 1; // Increment count
+                        } else if (add === "No") {
+                            currentCount -= 1; // Decrement count
+                        }
+                        $($count).text(currentCount); // Update the count display
+            
+                        // Update in locals (form)
+                        const doc = locals[doctype] && locals[doctype][buttonId];
+                        if (doc) {
+                            let liked_by = frappe.ui.get_liked_by(doc);
+            
+                            if (add === "Yes" && !liked_by.includes(frappe.session.user)) {
+                                liked_by.push(frappe.session.user);
+                            }
+            
+                            if (add === "No" && liked_by.includes(frappe.session.user)) {
+                                liked_by = liked_by.filter((user) => user !== frappe.session.user);
+                            }
+            
+                            doc._liked_by = JSON.stringify(liked_by);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        frappe.msgprint("Error toggling like: " + error);
+                    }
+                });
             });
