@@ -27,7 +27,6 @@ $(document).ready(function() {
             posts.forEach(post => {
                 const col = document.createElement('div');
                 col.className = 'post item col-md-4 col-xs-12 col-sm-4"';
-                
                 const thumbnailSrc = post[4] ? `${post[4]}` : "images/organisation-placeholder.svg";
                 var liked_by = post[5] ? decodeURI(post[5]) : "[]";
                 liked_by = JSON.parse(liked_by);
@@ -45,10 +44,10 @@ $(document).ready(function() {
                      
                     <div class="panel">
                               <div class="panel-header">
-                                 <img src=${thumbnailSrc} class="img-responsive"  alt="image"/>
+                                 <img src="${thumbnailSrc}" class="img-responsive"  alt="image"/>
                               </div>
                               <div class="panel-body">
-                                   <h3 class="post-title"><a href="blog-post.html">${post[1]}</a></h3>
+                                   <h3 class="post-title">${post[1]}</h3>
 
                                     <p>${post[2]}</p>
                                     <div class="pull-left"><a class="btn btn-black btn-xs" href="/community_issue?name=${post[0]}"><span class="read-more">Read More</span></a></div>
@@ -125,10 +124,10 @@ $(document).ready(function() {
                      
                     <div class="panel">
                               <div class="panel-header">
-                                 <img src=${thumbnailSrc} class="img-responsive"  alt="image"/>
+                                 <img src="${thumbnailSrc}" class="img-responsive"  alt="image"/>
                               </div>
                               <div class="panel-body">
-                                   <h3 class="post-title"><a href="blog-post.html">${post[1]}</a></h3>
+                                   <h3 class="post-title">${post[1]}</h3>
 
                                     <p>${post[2]}</p>
                                     <div class="pull-left"><a class="btn btn-black btn-xs" href="/community_issue?name=${post[0]}"><span class="read-more">Read More</span></a></div>
@@ -210,10 +209,10 @@ $(document).ready(function() {
                      
                     <div class="panel">
                               <div class="panel-header">
-                                 <img src=${thumbnailSrc} class="img-responsive"  alt="image"/>
+                                 <img src="${thumbnailSrc}" class="img-responsive"  alt="image"/>
                               </div>
                               <div class="panel-body">
-                                   <h3 class="post-title"><a href="blog-post.html">${post[1]}</a></h3>
+                                   <h3 class="post-title">${post[1]}</h3>
 
                                     <p>${post[2]}</p>
                                     <div class="pull-left"><a class="btn btn-black btn-xs" href="/community_issue?name=${post[0]}"><span class="read-more">Read More</span></a></div>

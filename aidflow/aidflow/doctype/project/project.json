@@ -110,9 +110,10 @@
    "label": "District"
   }
  ],
+ "image_field": "thumbnail",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-08 07:25:17.751975",
+ "modified": "2025-02-06 16:50:55.446518",
  "modified_by": "Administrator",
  "module": "Aidflow",
  "name": "Project",

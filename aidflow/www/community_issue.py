@@ -1,6 +1,7 @@
 import json
 import frappe
 from frappe import _
+import ast
 
 
 
@@ -28,6 +29,7 @@ def get_context(context):
 	
 def setup_context(context):
 	org=frappe.get_doc('Project', context['name'])
+	liked_by=ast.literal_eval(org._liked_by)
+	org.liked_by=len(liked_by)
 	context['org']=org
-	print(org.name)
 	return context
