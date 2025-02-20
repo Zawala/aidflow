@@ -55,7 +55,9 @@
                     
                     <li><a href="donate.html">Donate</a></li>
                     <li class="selected"><a href="upload_issue.html">Upload Issues</a></li>
-                </ul>
+                    <li><a onclick="logoutUser()">Log out</a></li>
+
+                  </ul>
             </div>
         </div>
      <div class="divider col-sm-12 col-xs-12 col-md-12">
@@ -209,8 +211,35 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/nav-hover.min.js"></script>
     <script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
-    <!-- Place in the <head>, after the three links -->
+    <script type="text/javascript" src="js/main.js"></script>                    <li><a onclick="logoutUser()">Log out</a></li>
+    <script>
+          
+          // Logout function
+          function logoutUser() {
+              $.ajax({
+                  url: "/api/method/logout", // Replace with your Frappe instance URL
+                  type: "GET",
+                  headers: {
+                      'X-Frappe-CSRF-Token': '{{ csrf_token }}' // Replace with the actual CSRF token
+                  },
+                  success: function(response) {
+                      // Handle successful logout
+                      console.log("User logged out successfully");
+                      window.location.href = "/login"; // Redirect to login page or any other page
+                  },
+                  error: function(xhr, status, error) {
+                      // Handle error
+                      console.error("Logout failed: ", error);
+                  }
+              });
+          }
+
+          // Example: Call the logout function when a button is clicked
+          $("#logoutButton").click(function() {
+              logoutUser();
+          });
+      
+    </script>
     <script>
      $('.testimonials-slider').bxSlider({
       slideWidth: 800,

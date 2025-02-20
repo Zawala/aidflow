@@ -18,7 +18,6 @@ def get_context(context):
 		raise frappe.Redirect
 	context.csfr_token=frappe.sessions.get_csrf_token()
 	context.user=frappe.session.user
-	print(context)
 	
 
 

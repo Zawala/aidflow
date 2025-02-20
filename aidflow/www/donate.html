@@ -47,7 +47,9 @@
                     
                     <li class="selected"><a href="donate.html">Donate</a></li>
                     <li><a href="upload_issue.html">Upload Issues</a></li>
-                </ul>
+                    <li><a onclick="logoutUser()">Log out</a></li>
+
+                  </ul>
             </div>
         </div>
         <div class="divider col-sm-12 col-xs-12 col-md-12">
@@ -96,46 +98,35 @@
             </div>
           </div>
         </div>
-        <div class="container donate-text">
-        <h3 class="text-center">Lorem ipsum dolor sit amet</h3>
         
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        </p>  
-        </div>
-
         <div class="fun-fact col-md-12">
         <div class="stat">
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="milestone-counter">
                     <i class="fa fa-users fa-3x"></i>
                     <span class="stat-count highlight">422</span>
-                    <div class="milestone-details">Happy Volunteers</div>
+                    <div class="milestone-details">Happy Citizens</div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="milestone-counter">
                     <i class="fa fa-map-marker fa-3x"></i>
                     <span class="stat-count highlight">26</span>
-                    <div class="milestone-details">Countries Served</div>
+                    <div class="milestone-details">Community Served</div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="milestone-counter">
                     <i class="fa fa-trophy fa-3x"></i>
                     <span class="stat-count highlight">14</span>
-                    <div class="milestone-details">Awards Win</div>
+                    <div class="milestone-details">Awards Won</div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="milestone-counter">
                     <i class="fa fa-money fa-3x"></i>
-                    <span class="stat-count highlight">232</span>
-                    <div class="milestone-details">Million USD Donated</div>
+                    <span class="stat-count highlight">100</span>
+                    <div class="milestone-details">Thousand USD Donated</div>
                 </div>
             </div>
     </div><!-- stat -->
@@ -170,7 +161,35 @@
         <script src="js/nav-hover.min.js"></script>
         <script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
-    <!-- Place in the <head>, after the three links -->
+
+        <script>
+           
+           // Logout function
+           function logoutUser() {
+               $.ajax({
+                   url: "/api/method/logout", // Replace with your Frappe instance URL
+                   type: "GET",
+                   headers: {
+                       'X-Frappe-CSRF-Token': '{{ csrf_token }}' // Replace with the actual CSRF token
+                   },
+                   success: function(response) {
+                       // Handle successful logout
+                       console.log("User logged out successfully");
+                       window.location.href = "/login"; // Redirect to login page or any other page
+                   },
+                   error: function(xhr, status, error) {
+                       // Handle error
+                       console.error("Logout failed: ", error);
+                   }
+               });
+           }
+    
+           // Example: Call the logout function when a button is clicked
+           $("#logoutButton").click(function() {
+               logoutUser();
+           });
+      
+    </script>
     <script>
      $('.testimonials-slider').bxSlider({
       slideWidth: 800,

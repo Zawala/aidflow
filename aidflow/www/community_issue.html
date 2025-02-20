@@ -8,9 +8,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<!--[if lt IE 9]>
-			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
+		
 		<link href="css/styles.css" rel="stylesheet">
     <link rel="stylesheet" href="css/demo.css" />
     <link rel="stylesheet" href="css/testimonial.css" />
@@ -47,6 +45,7 @@
                 
                 <li><a href="donate.html">Donate</a></li>
       <li><a href="upload_issue.html">Upload Issues</a></li>
+      <li><a  onclick="logoutUser()">Log out</a></li>
             </ul>
         </div>
     </div>
@@ -72,6 +71,7 @@
                 <div class="col-md-8">
                     <article class="blog-post">
                         
+                          
                         <h2 class="blog-post-title">Project Description</h2>
                         <p class="blog-post-meta">
                             {{org.project_description}}
@@ -120,6 +120,10 @@
                         
                         <div class="p-4">
                             <h4 class="fst-italic">Additional Details</h4>
+                            <div class="progress">
+                                
+                                <div class="progress-bar" role="progressbar" style="width: {{progress_float}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{progress_float}}%</div>
+                              </div>
                             <ol class="list-unstyled mb-0">
                                 <li>Status: <a href="">{{org.status}}</a></li>
                                 <li>Priority: <a href="">{{org.priority}}/5</a></li>
@@ -143,6 +147,34 @@
     <script src="js/nav-hover.min.js"></script>
     <script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
+    <script>
+       
+            // Logout function
+            function logoutUser() {
+                $.ajax({
+                    url: "/api/method/logout", // Replace with your Frappe instance URL
+                    type: "GET",
+                    headers: {
+                        'X-Frappe-CSRF-Token': '{{ csrf_token }}' // Replace with the actual CSRF token
+                    },
+                    success: function(response) {
+                        // Handle successful logout
+                        console.log("User logged out successfully");
+                        window.location.href = "/login"; // Redirect to login page or any other page
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error
+                        console.error("Logout failed: ", error);
+                    }
+                });
+            }
+    
+            // Example: Call the logout function when a button is clicked
+            $("#logoutButton").click(function() {
+                logoutUser();
+            });
+       
+    </script>
     <script>
         $('.testimonials-slider').bxSlider({
             slideWidth: 800,

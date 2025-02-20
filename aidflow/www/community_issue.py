@@ -17,7 +17,6 @@ def get_context(context):
 	if not (set(expected_keys) - set(list(frappe.form_dict))):
 		for key in expected_keys:
 			context[key] = frappe.form_dict[key]
-		print(context['name'])
 		context=setup_context(context)
 	else:
 		frappe.redirect_to_message(
@@ -29,7 +28,12 @@ def get_context(context):
 	
 def setup_context(context):
 	org=frappe.get_doc('Project', context['name'])
-	liked_by=ast.literal_eval(org._liked_by)
-	org.liked_by=len(liked_by)
+	print(int(((len(org.progress)/8)*100)))
+	if not org._liked_by=="[]":
+		liked_by=ast.literal_eval(org._liked_by)
+		org.liked_by=len(liked_by)
+	else:
+		org.liked_by=0
 	context['org']=org
+	context.progress_float=int(((len(org.progress)/7)*100))
 	return context

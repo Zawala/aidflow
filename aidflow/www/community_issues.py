@@ -35,7 +35,7 @@ def custom_search(number=0,search=None, thematic_area=None, registration_type=No
 								 "province": ["like", "%{0}%".format(province)]
 								 },
 						filters={
-							# "published": 1,
+							 "published": 1,
 							"project_title": ["like", "%{0}%".format(search)],
 			  					},	
 						 fields=['Name','project_title', 'project_description', 'thermatic_area', 'thumbnail','_liked_by'],

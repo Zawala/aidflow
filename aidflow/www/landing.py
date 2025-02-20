@@ -15,7 +15,6 @@ def get_context(context):
 		frappe.local.flags.redirect_location = "/Interests"
 		raise frappe.Redirect
 	context.posts=custom_search()
-	print(context.posts)
 	
 
 
