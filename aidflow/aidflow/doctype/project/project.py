@@ -7,7 +7,9 @@ from datetime import datetime
 
 
 class Project(Document):
-	pass
+    def before_save(self):
+        print(self.priority)
+
 
 
 
@@ -15,6 +17,7 @@ class Project(Document):
 @frappe.whitelist()
 def publish(name):
     doc=frappe.get_doc("Project",name)
+    doc.priority=analyze_importance(doc.project_description)
     if not doc.published:
         if not doc.thumbnail:
             frappe.throw('Please Insert thumbnail first')
@@ -22,7 +25,24 @@ def publish(name):
     else:
         doc.published=False
     doc.save(ignore_permissions=True)
+
+
+
+def analyze_importance(text):
+    import spacy
+    from textblob import TextBlob
+    nlp = spacy.load("en_core_web_sm")
+
+    doc = nlp(text)
+    entities = [ent.text for ent in doc.ents]  # Extract entities
+    sentiment = TextBlob(text).sentiment.polarity  # -1 (negative) to +1 (positive)
     
+    # Weighted score (customize based on your needs)
+    importance = len(entities) * 0.3 + abs(sentiment) * 0.7
+    return importance
+
+text = "Flooding in Nairobi has displaced 1000 people."
+print(analyze_importance(text)) 
 @frappe.whitelist()
 def update_progress(name,stage,comment):
     print(name,stage,comment)
