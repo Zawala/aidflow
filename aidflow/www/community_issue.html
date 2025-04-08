@@ -113,7 +113,11 @@
                         </blockquote>
                         <ul>
                             
-                            <li>{{org.thermatic_area}}</li>
+                            <li>{{org.thermatic_area}}
+                            {% if org.thermatic_area=="Other" -%}
+                           <small>({{org.otherspecify}})</small>
+                            {%- endif %}
+                        </li>
                             
                         </ul>
                     </article>

@@ -12,6 +12,7 @@
   "province",
   "district",
   "thermatic_area",
+  "otherspecify",
   "thumbnail",
   "priority",
   "status",
@@ -92,7 +93,7 @@
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Thermatic Area",
-   "options": "HIV\nMALARIA\nTB\nNCDs\nDISABILITY\nSRHR\nWOMEN RIGHTS\nCHILD RIGHTS\nHEALTH ADVOCACY\nOVC\nGENDER\nMARTENAL HEALTH\nHEALTH RELATED RESEARCH\nHEALTH INFORMATION SYSTEMS\nKEY POPULATION\nLGBTIQ\nDRUGS AND SUBSTANCE ABUSE\nEMERGENCIES\nMENTAL HEALTH\nCLIMATE CHANGE\nECONOMIC EMPOWERMENT\nYOUTH\nFOOD SECURITY"
+   "options": "HIV\nMALARIA\nTB\nNCDs\nDISABILITY\nSRHR\nWOMEN RIGHTS\nCHILD RIGHTS\nHEALTH ADVOCACY\nOVC\nGENDER\nMARTENAL HEALTH\nHEALTH RELATED RESEARCH\nHEALTH INFORMATION SYSTEMS\nKEY POPULATION\nLGBTIQ\nDRUGS AND SUBSTANCE ABUSE\nEMERGENCIES\nMENTAL HEALTH\nCLIMATE CHANGE\nECONOMIC EMPOWERMENT\nYOUTH\nFOOD SECURITY\nOther"
   },
   {
    "fieldname": "province",
@@ -108,12 +109,18 @@
    "fieldname": "district",
    "fieldtype": "Select",
    "label": "District"
+  },
+  {
+   "depends_on": "eval: doc.thermatic_area==\"Other\"",
+   "fieldname": "otherspecify",
+   "fieldtype": "Data",
+   "label": "Other(Specify)"
   }
  ],
  "image_field": "thumbnail",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-06 16:50:55.446518",
+ "modified": "2025-04-08 18:16:54.468203",
  "modified_by": "Administrator",
  "module": "Aidflow",
  "name": "Project",

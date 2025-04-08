@@ -28,12 +28,15 @@ def get_context(context):
 	
 def setup_context(context):
 	org=frappe.get_doc('Project', context['name'])
-	print(int(((len(org.progress)/8)*100)))
-	if not org._liked_by=="[]":
-		liked_by=ast.literal_eval(org._liked_by)
-		org.liked_by=len(liked_by)
+	print(org._liked_by)
+	if org._liked_by and org._liked_by != "[]":
+		try:
+			liked_by = ast.literal_eval(org._liked_by)
+			org.liked_by = len(liked_by) if liked_by else 0
+		except (ValueError, SyntaxError):
+			org.liked_by = 0
 	else:
-		org.liked_by=0
+		org.liked_by = 0
 	context['org']=org
 	context.progress_float=int(((len(org.progress)/7)*100))
 	return context
