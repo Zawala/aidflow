@@ -127,10 +127,14 @@
                                 <option>ECONOMIC EMPOWERMENT</option>
                                 <option>YOUTH</option>
                                 <option>FOOD SECURITY</option>
+                                <option>Other</option>
                               </select>
                             <!-- Email -->
 
                         </div><!-- End Left Inputs -->
+                            <div id="other-specify-container" class="col-xs-12 wow animated slideInRight" data-wow-delay=".5s" style="display: none;">
+                                <textarea id="otherspecify" class="form textarea" placeholder="Please specify"></textarea>
+                            </div>
                         <!-- Right Inputs -->
                         <div class="col-xs-12 wow animated slideInRight" data-wow-delay=".5s">
                             <!-- Message -->
@@ -213,7 +217,16 @@
     <script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>                    
     <script>
-          
+          document.getElementById('thematic').addEventListener('change', function() {
+            const otherContainer = document.getElementById('other-specify-container');
+            if (this.value === 'Other') {
+                otherContainer.style.display = 'block';
+                document.getElementById('otherspecify').setAttribute('required', 'required');
+            } else {
+                otherContainer.style.display = 'none';
+                document.getElementById('otherspecify').removeAttribute('required');
+            }
+        });
           // Logout function
           function logoutUser() {
               $.ajax({

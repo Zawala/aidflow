@@ -22,12 +22,13 @@ def get_context(context):
 
 
 @frappe.whitelist()
-def upload_issue(description,title,thematic,province):
+def upload_issue(description,title,thematic,province,otherspecify):
 	print(description,title,thematic,province)
 	doc=frappe.new_doc("Project")
 	doc.province=province
 	doc.thermatic_area=thematic
 	doc.project_title=title
 	doc.project_description=description
+	doc.otherspecify=otherspecify
 	doc.save(ignore_permissions=True)
 	

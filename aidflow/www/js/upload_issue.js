@@ -13,7 +13,8 @@ $( "#submit" ).click(function (event) {
             'description': $("#description").val(),
             'title': $("#title").val(),
             'thematic': thematic,
-            'province': province
+            'province': province,
+            'otherspecify': $("#otherspecify").val()
         };
         $.ajax({
             url: "/api/method/aidflow.www.upload_issue.upload_issue",
